@@ -28,7 +28,9 @@ Switching from a direct to an indirect syscall is pretty straightforward.
 Essentially, in the assembler code, the `syscall` and `ret` instructions are replaced with the `jmp QWORD PTR <variable>` instruction, which makes an unconditional jump to the memory address passed as an argument. In this case, that address will point to the syscall instruction within the context of ntdll.dll.
 
 ## Focus on Call Stack
-TODO
+This time, the function immediately preceding the transition to kernel space is correctly identified as the `NtCreateThreadEx` function in `ntdll.dll`. This occurs because the `syscall` instruction is now executed within the memory context of `ntdll.dll`, rather than in user code, as was the case with direct syscalls
+
+![image](https://github.com/user-attachments/assets/14db80a3-4204-4afc-93c5-6f8d4e2ff447)
 
 ## Test Result
 The shellcode ran successfully, and the antivirus software didn’t generate any notifications.
