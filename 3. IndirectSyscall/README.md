@@ -30,7 +30,9 @@ Essentially, in the assembler code, the `syscall` and `ret` instructions are rep
 ## Focus on Call Stack
 This time, the function immediately preceding the transition to kernel space is correctly identified as the `NtCreateThreadEx` function in `ntdll.dll`. This occurs because the `syscall` instruction is now executed within the memory context of `ntdll.dll`, rather than in user code, as was the case with direct syscalls
 
-![image](https://github.com/user-attachments/assets/14db80a3-4204-4afc-93c5-6f8d4e2ff447)
+<p align="center">
+  <img width="460" src="https://github.com/user-attachments/assets/14db80a3-4204-4afc-93c5-6f8d4e2ff447">
+</p>
 
 ## Test Result
 The shellcode ran successfully, and the antivirus software didn’t generate any notifications.
