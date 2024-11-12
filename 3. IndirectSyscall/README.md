@@ -33,9 +33,7 @@ TODO
 ## Test Result
 The shellcode ran successfully, and the antivirus software didn’t generate any notifications.
 
-<p align="center">
-  <img width="460" src="https://github.com/user-attachments/assets/0c8fb988-4094-4334-9931-598db7c0ca6a">
-</p>
+![indirect](https://github.com/user-attachments/assets/9030e7a9-e343-45db-bf2f-b8f27acaf593)
 
 ## RELATED PROJECTS
 
