@@ -11,9 +11,7 @@ The shellcode used triggers a basic popup window. We’re not diving into msfven
 ## Test Result
 Tests confirm that as soon as it's run, the PE gets blocked right away and flagged as malicious.
 
-<p align="center">
-  <img width="460" src="https://github.com/user-attachments/assets/80e4dc15-f744-454f-80ea-18969a287d3a">
-</p>
+![winapi](https://github.com/user-attachments/assets/397b6f3e-df03-49fa-b95a-42b595ea8245)
 
 ## References
 
