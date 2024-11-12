@@ -14,7 +14,7 @@
 #define ZwWriteVirtualMemoryHash		0xC5D0A4C2
 #define ZwProtectVirtualMemoryHash		0xBC3F4D89
 #define ZwCreateThreadExHash			0xCD1DF775
-#define ZwDrawText				0xA4926265
+#define ZwDrawText						0xA4926265
 
 DWORD avmSSN;
 DWORD wvmSSN;

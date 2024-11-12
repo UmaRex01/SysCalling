@@ -1,4 +1,4 @@
-// FROM: https://github.com/Ginurx/chacha20-c/blob/master/chacha20.h
+// FROM: https://github.com/Ginurx/chacha20-c
 
 #pragma once
 
