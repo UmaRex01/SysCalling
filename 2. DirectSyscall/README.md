@@ -87,9 +87,7 @@ As expected, in the second call stack, all references to system libraries have d
 ## Test Result
 The shellcode runs successfully at first, but soon after, the PE gets blocked and flagged as malicious. This could be because the inline hooks were bypassed, allowing the "malicious" code to run. However, using direct system calls leaves behind a bunch of traces that the EDR can pick up on, which makes it easier for it to mark the executable as malicious.
 
-<p align="center">
-  <img width="460" src="https://github.com/user-attachments/assets/9024b2c5-afe4-49f1-b944-896e51ae56ed">
-</p>
+![direct](https://github.com/user-attachments/assets/0ffaa731-0074-4b93-a132-b367f39c1d31)
 
 ## RELATED PROJECTS
 
