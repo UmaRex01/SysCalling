@@ -13,6 +13,8 @@ There are four types of hardware breakpoints, corresponding to the type of memor
 Hardware breakpoints are implemented using registers specifically provided by the processor for debugging operations. Specifically, registers `DR0` to `DR3` are used to specify the memory address at which the breakpoint is to be set, while register `DR7` is used to specify its type.
 
 ## Implementation
+*For didactic reasons, the implementation in this project has been kept as simple as possible to make the technique easy to understand.*
+
 There are several variations of this technique, outlined in the following 'Related Project' section, but the underlying philosophy remains the same. Essentially, the process involves registering an exception handler, initiating a system call through a specific `ntdll.dll` API, pausing it with a hardware breakpoint, manipulating registers to adjust data as needed, and then resuming execution
 
 The implementation here is specifically inspired by [MutationGate](https://github.com/senzee1984/MutationGate).
