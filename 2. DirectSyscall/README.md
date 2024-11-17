@@ -69,7 +69,7 @@ The idea behind a Direct Syscall is pretty straightforward, but there are a few 
 
 What happens is that exactly what `ntdll.dll` does is reimplemented. In fact, `Syscalls.h` exposes exactly the same signature as the original `ntdll.dll` API (taken from the great [phnt](https://github.com/winsiderss/phnt) project), and its implementation is copied exactly as it is in `Syscalls.asm`. The code, which follows the Microsoft Macro Assembler (MASM) syntax, include following instructions:
 - A first instruction `mov r10, rcx`, which copies the value contained in the `rcx` register, which corresponds to the first parameter of the function according to the Windows x64 calling convention, to the `r10` register. This is done to preserve the original value of the `rcx` register, since this register is used internally by the syscall to perform other operations;
-- A second instruction `mov eax, <SSN>` which loads the value of the SSN into the `eax` register. **For the sake of simplicity, in this example the value of the SSN has not been dynamically resolved, but extracted from ntdll.dll and statically copied into the code**;
+- A second instruction `mov eax, <SSN>` which loads the value of the SSN into the `eax` register;
 - The `syscall` instruction, which causes the switch from user mode to kernel mode and instructs the processor to execute the function corresponding to the SSN value in the `eax` register;
 - The `ret` instruction, which returns to the caller.
 

