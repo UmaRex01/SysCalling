@@ -24,18 +24,12 @@
     <ClInclude Include="Syscalls.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="ChaCha20.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="ChaCha20.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

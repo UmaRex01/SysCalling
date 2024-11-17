@@ -137,12 +137,10 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChaCha20.h" />
     <ClInclude Include="Syscalls.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ChaCha20.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>

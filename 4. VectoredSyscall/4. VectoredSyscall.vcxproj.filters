@@ -24,18 +24,12 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChaCha20.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Syscalls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChaCha20.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

